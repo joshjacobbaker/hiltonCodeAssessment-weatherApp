@@ -30,3 +30,58 @@ Good:
 200 HTTP response code
 
 - Seeing smiley face flash before receiving the rendered weather card
+
+---
+
+---
+
+TypeScript:
+
+## city-weather-refactor.tsx - 27 Errors with this file
+
+// city-weather-refactor.tsx line 23
+
+ <!-- function getWeatherData(city: string): void { -->
+
+---
+
+---
+
+JavaScript:
+
+// city-weather-refactor.tsx line 12
+
+React.useEffect(() => {
+let mounted = true;
+if (mounted) {
+getWeatherData(props.city);
+}
+// cleanup
+return () => {
+mounted = false;
+};
+}, [props.city]);
+
+### Learning opportunity: Prevent fetch API memory leaks with AbortController
+
+<!-- https://medium.com/geekculture/avoid-memory-leaks-in-your-react-app-by-canceling-api-calls-9cf692c06573 -->
+
+useEffect(() => {
+setLoading(true);
+const controller = new AbortController();
+fetch("http://localhost:3001/posts", { signal: controller.signal })
+.then(response => response.json())
+.then(json => {
+setPosts(json);
+setLoading(false);
+})
+.catch(error => {
+window.alert(error);
+setLoading(false);
+});
+return () => {
+controller.abort();
+};
+}, []);
+
+---
