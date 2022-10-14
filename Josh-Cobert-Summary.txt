@@ -1,0 +1,40 @@
+*************
+Deliverable 1
+*************
+
+Synopsis
+--------
+  This bug was caused by the render method trying to access properties of the weatherResult object, 
+which was still set to its initial value of null at time of first render. 
+Similarly, a bad API call would yield the same result.
+  My solution is to validate weatherResult and conditionally render either: 
+the weather data (if API call is made successfully), 
+a loading message (if weatherResult still null), 
+or no results found message (if API call yields no results).
+
+Actions Taken
+-------------
+index.ts
+  - Made city input field required
+
+city-weather.tsx
+  - Moved API call into its own function, getWeather()
+  - Added validation of weather data fetch results before rendering
+  - Defined componentDidUpdate method to fetch new weather data
+
+**************
+Deliverable 2
+**************
+
+Actions Taken
+-------------
+city-weather-refactor.tsx
+  - Tracked states for the weather data, API fetch status, and API call success status
+  - Render loading spinner if fetching
+  - Render no results found component if city not found
+  - Create utility functions for titlizing string (used for description) and grabbing weather icon url
+  - Set component as aria-live and busy when fetching
+
+index.test.tsx
+  - Test improvements unsuccessful and to be continued
+
